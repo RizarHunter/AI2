@@ -24,12 +24,19 @@ public class Neuron {
 
     boolean isInputEqualOutput;
 
+    String name;
+
     public Neuron() {
         this.axonInput = new LinkedList<>();
         this.axonOutput = new LinkedList<>();
         this.input = 0;
         this.output = 0;
         this.isInputEqualOutput = false;
+        this.name = "";
+    }
+    public Neuron(String name) {
+        this();
+        this.name = name;
     }
 
     public void addAxonInput(Axon axon){
@@ -46,6 +53,13 @@ public class Neuron {
     public void addInput(double data){
         this.input += data;
         isInputEqualOutput = false;
+    }
+    public Neuron[] getConnectionList(){
+        Neuron[] neurons = new Neuron[axonOutput.size()];
+        for (int i = 0, len = axonOutput.size(); i < len; i++) {
+            neurons[i] = axonOutput.get(i).finish;
+        }
+        return neurons;
     }
 
     public void update() {
